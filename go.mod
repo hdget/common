@@ -4,7 +4,6 @@ go 1.23.1
 
 require (
 	github.com/gogo/protobuf v1.3.2
-	github.com/jmoiron/sqlx v1.4.0
 	go.uber.org/fx v1.23.0
 )
 
