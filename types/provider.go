@@ -11,21 +11,19 @@ const (
 	ProviderCategoryDb
 	ProviderCategoryRedis
 	ProviderCategoryMq
-	ProviderCategoryDbSqlx
-	ProviderCategoryDbBuilder
+	ProviderCategoryOss
 )
 
 type ProviderName string
 
 const (
-	ProviderNameConfigViper       ProviderName = "config-viper"
-	ProviderNameLoggerZerolog     ProviderName = "logger-zerolog"
-	ProviderNameRedisRedigo       ProviderName = "redis-redigo"
-	ProviderNameDbSqlBoilerMysql  ProviderName = "db-sqlboiler-mysql"
-	ProviderNameDbSqlBoilerSqlite ProviderName = "db-sqlboiler-sqlite3"
-	ProviderNameDbSqlxMysql       ProviderName = "db-sqlx-mysql"
-	ProviderNameDbSquirrelMysql   ProviderName = "db-squirrel-mysql"
-	ProviderNameMqRabbitMq        ProviderName = "mq-rabbitmq"
+	ProviderNameConfigViper      ProviderName = "config-viper"
+	ProviderNameLoggerZerolog    ProviderName = "logger-zerolog"
+	ProviderNameRedisRedigo      ProviderName = "redis-redigo"
+	ProviderNameMysqlSqlBoiler   ProviderName = "mysql-sqlboiler"
+	ProviderNameSqlite3SqlBoiler ProviderName = "sqlite3-sqlboiler"
+	ProviderNameMqRabbitMq       ProviderName = "mq-rabbitmq"
+	ProviderNameOssAliyun        ProviderName = "oss-aliyun"
 )
 
 // Capability 能力提供者
