@@ -14,22 +14,10 @@ const (
 	ProviderCategoryOss
 )
 
-type ProviderName string
-
-const (
-	ProviderNameConfigViper      ProviderName = "config-viper"
-	ProviderNameLoggerZerolog    ProviderName = "logger-zerolog"
-	ProviderNameRedisRedigo      ProviderName = "redis-redigo"
-	ProviderNameMysqlSqlBoiler   ProviderName = "mysql-sqlboiler"
-	ProviderNameSqlite3SqlBoiler ProviderName = "sqlite3-sqlboiler"
-	ProviderNameMqRabbitMq       ProviderName = "mq-rabbitmq"
-	ProviderNameOssAliyun        ProviderName = "oss-aliyun"
-)
-
 // Capability 能力提供者
 type Capability struct {
 	Category ProviderCategory
-	Name     ProviderName
+	Name     string
 	Module   fx.Option
 }
 
