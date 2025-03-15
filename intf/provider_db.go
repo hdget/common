@@ -2,11 +2,10 @@ package intf
 
 import (
 	"database/sql"
-	"github.com/hdget/common/types"
 )
 
 type DbProvider interface {
-	types.Provider
+	Provider
 	My() DbClient
 	Master() DbClient
 	Slave(i int) DbClient

@@ -2,7 +2,6 @@ package intf
 
 import (
 	"github.com/hdget/common/protobuf"
-	"github.com/hdget/common/types"
 )
 
 type RedisCommand struct {
@@ -11,7 +10,7 @@ type RedisCommand struct {
 }
 
 type RedisProvider interface {
-	types.Provider
+	Provider
 	My() RedisClient
 	By(string) RedisClient
 }
