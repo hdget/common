@@ -1,12 +1,11 @@
 package intf
 
 import (
-	"github.com/hdget/common/types"
 	"log"
 )
 
 type LoggerProvider interface {
-	types.Provider
+	Provider
 	GetStdLogger() *log.Logger
 	Log(keyvals ...interface{}) error
 	Trace(msg string, keyvals ...interface{})

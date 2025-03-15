@@ -9,7 +9,7 @@ import (
 // 相同name的多个订阅者如果订阅同一个topic,则只有一个订阅者会收到消息
 // 不同name的多个订阅者果订阅同一个topic,则所有订阅者都会收到消息
 type MessageQueueProvider interface {
-	types.Provider
+	Provider
 	NewPublisher(name string, args ...*types.PublisherOption) (MessageQueuePublisher, error)
 	NewSubscriber(name string, args ...*types.SubscriberOption) (MessageQueueSubscriber, error)
 }
