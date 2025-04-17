@@ -22,3 +22,36 @@ message NextParam {
   int64 pageSize = 2;           // 每页数量
   SortDirection direction = 3;  // 排序是升序还是降序
 }
+
+enum EnableStatus {
+  EnableStatusDisabled = 0;
+  EnableStatusEnabled = 1;
+}
+
+enum VerifyStatus {
+  VerifyStatusUnverified = 0;
+  VerifyStatusVerified = 1;
+}
+
+enum BoolValue {
+  BoolValueFalse = 0;
+  BoolValueTrue = 1;
+}
+
+enum DaprModuleKind {
+  DaprModuleKindUnknown  = 0;
+  DaprModuleKindInvocation = 1;
+  DaprModuleKindEvent = 2;
+  DaprModuleKindDelayEvent = 3;
+  DaprModuleKindHealth = 4;
+}
+
+message DaprHandler {
+  DaprModuleKind moduleKind = 1; // 模块类型
+  string pkgPath = 2; // 包路径
+  string module = 3;  // 模块名
+  string name = 4;  // 处理函数名
+  string alias = 5; // 处理函数别名
+  map<string, string> annotations = 7; // 注解
+  repeated string comments = 6; // 注释
+}
