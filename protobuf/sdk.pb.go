@@ -1146,7 +1146,7 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ModuleName", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Module", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
