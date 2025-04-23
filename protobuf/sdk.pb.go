@@ -22,195 +22,64 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type EnableStatus int32
+// 排序方向
+type SortDirection int32
 
 const (
-	EnableStatus_EnableStatusDisabled EnableStatus = 0
-	EnableStatus_EnableStatusEnabled  EnableStatus = 1
+	SortDirection_Asc  SortDirection = 0
+	SortDirection_Desc SortDirection = 1
 )
 
-var EnableStatus_name = map[int32]string{
-	0: "EnableStatusDisabled",
-	1: "EnableStatusEnabled",
+var SortDirection_name = map[int32]string{
+	0: "Asc",
+	1: "Desc",
 }
 
-var EnableStatus_value = map[string]int32{
-	"EnableStatusDisabled": 0,
-	"EnableStatusEnabled":  1,
+var SortDirection_value = map[string]int32{
+	"Asc":  0,
+	"Desc": 1,
 }
 
-func (x EnableStatus) String() string {
-	return proto.EnumName(EnableStatus_name, int32(x))
+func (x SortDirection) String() string {
+	return proto.EnumName(SortDirection_name, int32(x))
 }
 
-func (EnableStatus) EnumDescriptor() ([]byte, []int) {
+func (SortDirection) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_70decb0fb6f436df, []int{0}
 }
 
-type VerifyStatus int32
+type DaprModuleKind int32
 
 const (
-	VerifyStatus_VerifyStatusUnverified VerifyStatus = 0
-	VerifyStatus_VerifyStatusVerified   VerifyStatus = 1
+	DaprModuleKind_DaprModuleKindUnknown    DaprModuleKind = 0
+	DaprModuleKind_DaprModuleKindInvocation DaprModuleKind = 1
+	DaprModuleKind_DaprModuleKindEvent      DaprModuleKind = 2
+	DaprModuleKind_DaprModuleKindDelayEvent DaprModuleKind = 3
+	DaprModuleKind_DaprModuleKindHealth     DaprModuleKind = 4
 )
 
-var VerifyStatus_name = map[int32]string{
-	0: "VerifyStatusUnverified",
-	1: "VerifyStatusVerified",
+var DaprModuleKind_name = map[int32]string{
+	0: "DaprModuleKindUnknown",
+	1: "DaprModuleKindInvocation",
+	2: "DaprModuleKindEvent",
+	3: "DaprModuleKindDelayEvent",
+	4: "DaprModuleKindHealth",
 }
 
-var VerifyStatus_value = map[string]int32{
-	"VerifyStatusUnverified": 0,
-	"VerifyStatusVerified":   1,
+var DaprModuleKind_value = map[string]int32{
+	"DaprModuleKindUnknown":    0,
+	"DaprModuleKindInvocation": 1,
+	"DaprModuleKindEvent":      2,
+	"DaprModuleKindDelayEvent": 3,
+	"DaprModuleKindHealth":     4,
 }
 
-func (x VerifyStatus) String() string {
-	return proto.EnumName(VerifyStatus_name, int32(x))
+func (x DaprModuleKind) String() string {
+	return proto.EnumName(DaprModuleKind_name, int32(x))
 }
 
-func (VerifyStatus) EnumDescriptor() ([]byte, []int) {
+func (DaprModuleKind) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_70decb0fb6f436df, []int{1}
-}
-
-type BoolValue int32
-
-const (
-	BoolValue_BoolValueFalse BoolValue = 0
-	BoolValue_BoolValueTrue  BoolValue = 1
-)
-
-var BoolValue_name = map[int32]string{
-	0: "BoolValueFalse",
-	1: "BoolValueTrue",
-}
-
-var BoolValue_value = map[string]int32{
-	"BoolValueFalse": 0,
-	"BoolValueTrue":  1,
-}
-
-func (x BoolValue) String() string {
-	return proto.EnumName(BoolValue_name, int32(x))
-}
-
-func (BoolValue) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{2}
-}
-
-type EmptyRequest struct {
-}
-
-func (m *EmptyRequest) Reset()         { *m = EmptyRequest{} }
-func (m *EmptyRequest) String() string { return proto.CompactTextString(m) }
-func (*EmptyRequest) ProtoMessage()    {}
-func (*EmptyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{0}
-}
-func (m *EmptyRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *EmptyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_EmptyRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *EmptyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EmptyRequest.Merge(m, src)
-}
-func (m *EmptyRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *EmptyRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_EmptyRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_EmptyRequest proto.InternalMessageInfo
-
-type EmptyResponse struct {
-}
-
-func (m *EmptyResponse) Reset()         { *m = EmptyResponse{} }
-func (m *EmptyResponse) String() string { return proto.CompactTextString(m) }
-func (*EmptyResponse) ProtoMessage()    {}
-func (*EmptyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{1}
-}
-func (m *EmptyResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *EmptyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_EmptyResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *EmptyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EmptyResponse.Merge(m, src)
-}
-func (m *EmptyResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *EmptyResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_EmptyResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_EmptyResponse proto.InternalMessageInfo
-
-type SimpleResponse struct {
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-}
-
-func (m *SimpleResponse) Reset()         { *m = SimpleResponse{} }
-func (m *SimpleResponse) String() string { return proto.CompactTextString(m) }
-func (*SimpleResponse) ProtoMessage()    {}
-func (*SimpleResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{2}
-}
-func (m *SimpleResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SimpleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SimpleResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SimpleResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SimpleResponse.Merge(m, src)
-}
-func (m *SimpleResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *SimpleResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_SimpleResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SimpleResponse proto.InternalMessageInfo
-
-func (m *SimpleResponse) GetMessage() string {
-	if m != nil {
-		return m.Message
-	}
-	return ""
 }
 
 // 按limit分页
@@ -223,7 +92,7 @@ func (m *ListParam) Reset()         { *m = ListParam{} }
 func (m *ListParam) String() string { return proto.CompactTextString(m) }
 func (*ListParam) ProtoMessage()    {}
 func (*ListParam) Descriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{3}
+	return fileDescriptor_70decb0fb6f436df, []int{0}
 }
 func (m *ListParam) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -266,35 +135,28 @@ func (m *ListParam) GetPageSize() int64 {
 	return 0
 }
 
-// 路由项
-type RouteItem struct {
-	Id            int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	App           string   `protobuf:"bytes,2,opt,name=app,proto3" json:"app,omitempty"`
-	ModuleName    string   `protobuf:"bytes,3,opt,name=moduleName,proto3" json:"moduleName,omitempty"`
-	ModuleVersion int32    `protobuf:"varint,4,opt,name=moduleVersion,proto3" json:"moduleVersion,omitempty"`
-	Handler       string   `protobuf:"bytes,5,opt,name=handler,proto3" json:"handler,omitempty"`
-	Endpoint      string   `protobuf:"bytes,6,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	HttpMethod    string   `protobuf:"bytes,7,opt,name=httpMethod,proto3" json:"httpMethod,omitempty"`
-	Origin        string   `protobuf:"bytes,8,opt,name=origin,proto3" json:"origin,omitempty"`
-	IsPublic      int32    `protobuf:"varint,9,opt,name=isPublic,proto3" json:"isPublic,omitempty"`
-	IsRawResponse int32    `protobuf:"varint,10,opt,name=isRawResponse,proto3" json:"isRawResponse,omitempty"`
-	Permissions   []string `protobuf:"bytes,11,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	Url           string   `protobuf:"bytes,12,opt,name=url,proto3" json:"url,omitempty"`
-	Comment       string   `protobuf:"bytes,13,opt,name=comment,proto3" json:"comment,omitempty"`
+type DaprHandler struct {
+	ModuleKind  DaprModuleKind    `protobuf:"varint,1,opt,name=moduleKind,proto3,enum=hdget.protobuf.DaprModuleKind" json:"moduleKind,omitempty"`
+	PkgPath     string            `protobuf:"bytes,2,opt,name=pkgPath,proto3" json:"pkgPath,omitempty"`
+	Module      string            `protobuf:"bytes,3,opt,name=module,proto3" json:"module,omitempty"`
+	Name        string            `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Alias       string            `protobuf:"bytes,5,opt,name=alias,proto3" json:"alias,omitempty"`
+	Annotations map[string]string `protobuf:"bytes,7,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Comments    []string          `protobuf:"bytes,6,rep,name=comments,proto3" json:"comments,omitempty"`
 }
 
-func (m *RouteItem) Reset()         { *m = RouteItem{} }
-func (m *RouteItem) String() string { return proto.CompactTextString(m) }
-func (*RouteItem) ProtoMessage()    {}
-func (*RouteItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_70decb0fb6f436df, []int{4}
+func (m *DaprHandler) Reset()         { *m = DaprHandler{} }
+func (m *DaprHandler) String() string { return proto.CompactTextString(m) }
+func (*DaprHandler) ProtoMessage()    {}
+func (*DaprHandler) Descriptor() ([]byte, []int) {
+	return fileDescriptor_70decb0fb6f436df, []int{1}
 }
-func (m *RouteItem) XXX_Unmarshal(b []byte) error {
+func (m *DaprHandler) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *RouteItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DaprHandler) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_RouteItem.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DaprHandler.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -304,231 +166,106 @@ func (m *RouteItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *RouteItem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RouteItem.Merge(m, src)
+func (m *DaprHandler) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DaprHandler.Merge(m, src)
 }
-func (m *RouteItem) XXX_Size() int {
+func (m *DaprHandler) XXX_Size() int {
 	return m.Size()
 }
-func (m *RouteItem) XXX_DiscardUnknown() {
-	xxx_messageInfo_RouteItem.DiscardUnknown(m)
+func (m *DaprHandler) XXX_DiscardUnknown() {
+	xxx_messageInfo_DaprHandler.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_RouteItem proto.InternalMessageInfo
+var xxx_messageInfo_DaprHandler proto.InternalMessageInfo
 
-func (m *RouteItem) GetId() int64 {
+func (m *DaprHandler) GetModuleKind() DaprModuleKind {
 	if m != nil {
-		return m.Id
+		return m.ModuleKind
 	}
-	return 0
+	return DaprModuleKind_DaprModuleKindUnknown
 }
 
-func (m *RouteItem) GetApp() string {
+func (m *DaprHandler) GetPkgPath() string {
 	if m != nil {
-		return m.App
-	}
-	return ""
-}
-
-func (m *RouteItem) GetModuleName() string {
-	if m != nil {
-		return m.ModuleName
+		return m.PkgPath
 	}
 	return ""
 }
 
-func (m *RouteItem) GetModuleVersion() int32 {
+func (m *DaprHandler) GetModule() string {
 	if m != nil {
-		return m.ModuleVersion
-	}
-	return 0
-}
-
-func (m *RouteItem) GetHandler() string {
-	if m != nil {
-		return m.Handler
+		return m.Module
 	}
 	return ""
 }
 
-func (m *RouteItem) GetEndpoint() string {
+func (m *DaprHandler) GetName() string {
 	if m != nil {
-		return m.Endpoint
+		return m.Name
 	}
 	return ""
 }
 
-func (m *RouteItem) GetHttpMethod() string {
+func (m *DaprHandler) GetAlias() string {
 	if m != nil {
-		return m.HttpMethod
+		return m.Alias
 	}
 	return ""
 }
 
-func (m *RouteItem) GetOrigin() string {
+func (m *DaprHandler) GetAnnotations() map[string]string {
 	if m != nil {
-		return m.Origin
-	}
-	return ""
-}
-
-func (m *RouteItem) GetIsPublic() int32 {
-	if m != nil {
-		return m.IsPublic
-	}
-	return 0
-}
-
-func (m *RouteItem) GetIsRawResponse() int32 {
-	if m != nil {
-		return m.IsRawResponse
-	}
-	return 0
-}
-
-func (m *RouteItem) GetPermissions() []string {
-	if m != nil {
-		return m.Permissions
+		return m.Annotations
 	}
 	return nil
 }
 
-func (m *RouteItem) GetUrl() string {
+func (m *DaprHandler) GetComments() []string {
 	if m != nil {
-		return m.Url
+		return m.Comments
 	}
-	return ""
-}
-
-func (m *RouteItem) GetComment() string {
-	if m != nil {
-		return m.Comment
-	}
-	return ""
+	return nil
 }
 
 func init() {
-	proto.RegisterEnum("hdget.protobuf.EnableStatus", EnableStatus_name, EnableStatus_value)
-	proto.RegisterEnum("hdget.protobuf.VerifyStatus", VerifyStatus_name, VerifyStatus_value)
-	proto.RegisterEnum("hdget.protobuf.BoolValue", BoolValue_name, BoolValue_value)
-	proto.RegisterType((*EmptyRequest)(nil), "hdget.protobuf.EmptyRequest")
-	proto.RegisterType((*EmptyResponse)(nil), "hdget.protobuf.EmptyResponse")
-	proto.RegisterType((*SimpleResponse)(nil), "hdget.protobuf.SimpleResponse")
+	proto.RegisterEnum("hdget.protobuf.SortDirection", SortDirection_name, SortDirection_value)
+	proto.RegisterEnum("hdget.protobuf.DaprModuleKind", DaprModuleKind_name, DaprModuleKind_value)
 	proto.RegisterType((*ListParam)(nil), "hdget.protobuf.ListParam")
-	proto.RegisterType((*RouteItem)(nil), "hdget.protobuf.RouteItem")
+	proto.RegisterType((*DaprHandler)(nil), "hdget.protobuf.DaprHandler")
+	proto.RegisterMapType((map[string]string)(nil), "hdget.protobuf.DaprHandler.AnnotationsEntry")
 }
 
 func init() { proto.RegisterFile("sdk.proto", fileDescriptor_70decb0fb6f436df) }
 
 var fileDescriptor_70decb0fb6f436df = []byte{
-	// 488 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x92, 0xcf, 0x6e, 0xd3, 0x40,
-	0x10, 0xc6, 0xe3, 0xa4, 0x4d, 0xeb, 0x69, 0x12, 0xc2, 0x52, 0x95, 0x55, 0x0f, 0x56, 0x14, 0x71,
-	0x88, 0x72, 0x68, 0x24, 0xb8, 0xc1, 0x89, 0xaa, 0x45, 0x42, 0x02, 0x54, 0x39, 0x90, 0x03, 0xb7,
-	0x4d, 0x3c, 0x4d, 0x56, 0x78, 0xbd, 0xcb, 0xfe, 0x01, 0x95, 0xa7, 0xe0, 0xb1, 0x38, 0xf6, 0xc8,
-	0x11, 0x25, 0x4f, 0xc0, 0x1b, 0xa0, 0x5d, 0xdb, 0xc1, 0x3d, 0x79, 0x7e, 0xdf, 0xe7, 0x9d, 0x9d,
-	0x6f, 0xb4, 0x10, 0x9b, 0xec, 0xcb, 0x85, 0xd2, 0xd2, 0x4a, 0x32, 0xd8, 0x64, 0x6b, 0xb4, 0x25,
-	0x2c, 0xdd, 0xed, 0x78, 0x00, 0xbd, 0x6b, 0xa1, 0xec, 0x5d, 0x8a, 0x5f, 0x1d, 0x1a, 0x3b, 0x7e,
-	0x04, 0xfd, 0x8a, 0x8d, 0x92, 0x85, 0xc1, 0xf1, 0x14, 0x06, 0x73, 0x2e, 0x54, 0x8e, 0xb5, 0x42,
-	0x28, 0x1c, 0x09, 0x34, 0x86, 0xad, 0x91, 0x46, 0xa3, 0x68, 0x12, 0xa7, 0x35, 0x8e, 0x5f, 0x41,
-	0xfc, 0x8e, 0x1b, 0x7b, 0xc3, 0x34, 0x13, 0x84, 0xc0, 0x81, 0xaa, 0xff, 0xe9, 0xa4, 0xa1, 0x26,
-	0xe7, 0x70, 0xec, 0xbf, 0x73, 0xfe, 0x03, 0x69, 0x3b, 0xe8, 0x7b, 0x1e, 0xff, 0x6d, 0x43, 0x9c,
-	0x4a, 0x67, 0xf1, 0xad, 0x45, 0x41, 0x06, 0xd0, 0xe6, 0x59, 0x75, 0xb6, 0xcd, 0x33, 0x32, 0x84,
-	0x0e, 0x53, 0x2a, 0x1c, 0x8a, 0x53, 0x5f, 0x92, 0x04, 0x40, 0xc8, 0xcc, 0xe5, 0xf8, 0x81, 0x09,
-	0xa4, 0x9d, 0x60, 0x34, 0x14, 0xf2, 0x0c, 0xfa, 0x25, 0x2d, 0x50, 0x1b, 0x2e, 0x0b, 0x7a, 0x30,
-	0x8a, 0x26, 0x87, 0xe9, 0x43, 0xd1, 0x87, 0xd9, 0xb0, 0x22, 0xcb, 0x51, 0xd3, 0xc3, 0x32, 0x4c,
-	0x85, 0x7e, 0x56, 0x2c, 0x32, 0x25, 0x79, 0x61, 0x69, 0x37, 0x58, 0x7b, 0xf6, 0x77, 0x6f, 0xac,
-	0x55, 0xef, 0xd1, 0x6e, 0x64, 0x46, 0x8f, 0xca, 0xbb, 0xff, 0x2b, 0xe4, 0x0c, 0xba, 0x52, 0xf3,
-	0x35, 0x2f, 0xe8, 0x71, 0xf0, 0x2a, 0xf2, 0x3d, 0xb9, 0xb9, 0x71, 0xcb, 0x9c, 0xaf, 0x68, 0x1c,
-	0xc6, 0xd9, 0xb3, 0x9f, 0x97, 0x9b, 0x94, 0x7d, 0xaf, 0xf7, 0x4c, 0xa1, 0x9c, 0xf7, 0x81, 0x48,
-	0x46, 0x70, 0xa2, 0x50, 0x0b, 0x6e, 0xfc, 0xf4, 0x86, 0x9e, 0x8c, 0x3a, 0x93, 0x38, 0x6d, 0x4a,
-	0x7e, 0x53, 0x4e, 0xe7, 0xb4, 0x57, 0x6e, 0xca, 0xe9, 0xdc, 0x67, 0x5c, 0x49, 0x21, 0xb0, 0xb0,
-	0xb4, 0x5f, 0x66, 0xac, 0x70, 0xfa, 0x1a, 0x7a, 0xd7, 0x05, 0x5b, 0xe6, 0x38, 0xb7, 0xcc, 0x3a,
-	0x43, 0x28, 0x9c, 0x36, 0xf9, 0x8a, 0x1b, 0x0f, 0xd9, 0xb0, 0x45, 0x9e, 0xc2, 0x93, 0xa6, 0x53,
-	0xd6, 0xd9, 0x30, 0x9a, 0x5e, 0x41, 0x6f, 0x81, 0x9a, 0xdf, 0xde, 0x55, 0x2d, 0xce, 0xe1, 0xac,
-	0xc9, 0x9f, 0x8a, 0x6f, 0x9e, 0x78, 0x68, 0x42, 0xe1, 0xb4, 0xe9, 0x2d, 0x6a, 0x27, 0x9a, 0x3e,
-	0x87, 0xf8, 0x52, 0xca, 0x7c, 0xc1, 0x72, 0x87, 0x84, 0xc0, 0x60, 0x0f, 0x6f, 0x58, 0x6e, 0x70,
-	0xd8, 0x22, 0x8f, 0xa1, 0xbf, 0xd7, 0x3e, 0x6a, 0x87, 0xc3, 0xe8, 0xf2, 0xe5, 0xaf, 0x6d, 0x12,
-	0xdd, 0x6f, 0x93, 0xe8, 0xcf, 0x36, 0x89, 0x7e, 0xee, 0x92, 0xd6, 0xfd, 0x2e, 0x69, 0xfd, 0xde,
-	0x25, 0xad, 0xcf, 0xa3, 0x35, 0xb7, 0x1b, 0xb7, 0xbc, 0x58, 0x49, 0x31, 0x0b, 0xef, 0x7d, 0xe6,
-	0x03, 0xcb, 0x62, 0x56, 0x3f, 0xfb, 0x65, 0x37, 0x54, 0x2f, 0xfe, 0x05, 0x00, 0x00, 0xff, 0xff,
-	0x78, 0x4b, 0xee, 0xe7, 0x1a, 0x03, 0x00, 0x00,
-}
-
-func (m *EmptyRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *EmptyRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *EmptyRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *EmptyResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *EmptyResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *EmptyResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *SimpleResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *SimpleResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SimpleResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Message) > 0 {
-		i -= len(m.Message)
-		copy(dAtA[i:], m.Message)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Message)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
+	// 432 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x51, 0x4d, 0x6b, 0xdb, 0x40,
+	0x10, 0xd5, 0x5a, 0x8e, 0x1d, 0x8d, 0xa9, 0x59, 0xa6, 0x69, 0xbb, 0x0d, 0x45, 0x18, 0x9f, 0x4c,
+	0x28, 0x32, 0xa4, 0x97, 0x92, 0x42, 0x20, 0xc5, 0x81, 0x94, 0x7e, 0x10, 0x14, 0x7a, 0xe9, 0x6d,
+	0x2d, 0x6d, 0x6d, 0x61, 0x69, 0x57, 0x48, 0x2b, 0x17, 0xf7, 0x57, 0xf4, 0xdc, 0x5f, 0xd4, 0x63,
+	0x2e, 0x85, 0x1e, 0x8b, 0xfd, 0x47, 0xca, 0xae, 0x1c, 0xd7, 0x6a, 0x73, 0xd2, 0xbc, 0x79, 0xf3,
+	0x66, 0xdf, 0x3c, 0x81, 0x57, 0xc6, 0x8b, 0x20, 0x2f, 0x94, 0x56, 0xd8, 0x9f, 0xc7, 0x33, 0xa1,
+	0x6b, 0x30, 0xad, 0x3e, 0x0f, 0x5f, 0x81, 0xf7, 0x2e, 0x29, 0xf5, 0x35, 0x2f, 0x78, 0x86, 0x08,
+	0xed, 0x9c, 0xcf, 0x04, 0x23, 0x03, 0x32, 0x72, 0x43, 0x5b, 0xe3, 0x31, 0x1c, 0x9a, 0xef, 0x4d,
+	0xf2, 0x55, 0xb0, 0x96, 0xed, 0xef, 0xf0, 0xf0, 0x67, 0x0b, 0x7a, 0x13, 0x9e, 0x17, 0x57, 0x5c,
+	0xc6, 0xa9, 0x28, 0xf0, 0x1c, 0x20, 0x53, 0x71, 0x95, 0x8a, 0xb7, 0x89, 0x8c, 0xed, 0x96, 0xfe,
+	0xa9, 0x1f, 0x34, 0x5f, 0x0c, 0x8c, 0xe0, 0xfd, 0x6e, 0x2a, 0xdc, 0x53, 0x20, 0x83, 0x6e, 0xbe,
+	0x98, 0x5d, 0x73, 0x3d, 0xb7, 0x4f, 0x79, 0xe1, 0x1d, 0xc4, 0xc7, 0xd0, 0xa9, 0xe7, 0x98, 0x6b,
+	0x89, 0x2d, 0x32, 0x8e, 0x25, 0xcf, 0x04, 0x6b, 0xdb, 0xae, 0xad, 0xf1, 0x08, 0x0e, 0x78, 0x9a,
+	0xf0, 0x92, 0x1d, 0xd8, 0x66, 0x0d, 0xf0, 0x03, 0xf4, 0xb8, 0x94, 0x4a, 0x73, 0x9d, 0x28, 0x59,
+	0xb2, 0xee, 0xc0, 0x1d, 0xf5, 0x4e, 0x9f, 0xdf, 0x67, 0x6e, 0x7b, 0x4d, 0x70, 0xf1, 0x77, 0xfc,
+	0x52, 0xea, 0x62, 0x15, 0xee, 0x2f, 0x30, 0xb9, 0x44, 0x2a, 0xcb, 0x84, 0xd4, 0x25, 0xeb, 0x0c,
+	0xdc, 0x91, 0x17, 0xee, 0xf0, 0xf1, 0x39, 0xd0, 0x7f, 0xc5, 0x48, 0xc1, 0x5d, 0x88, 0x95, 0x0d,
+	0xc5, 0x0b, 0x4d, 0x69, 0x7c, 0x2e, 0x79, 0x5a, 0x89, 0xed, 0xad, 0x35, 0x38, 0x6b, 0xbd, 0x24,
+	0x27, 0x43, 0x78, 0x70, 0xa3, 0x0a, 0x3d, 0x49, 0x0a, 0x11, 0x99, 0x15, 0xd8, 0x05, 0xf7, 0xa2,
+	0x8c, 0xa8, 0x83, 0x87, 0xd0, 0x9e, 0x88, 0x32, 0xa2, 0xe4, 0xe4, 0x3b, 0x81, 0x7e, 0x33, 0x4a,
+	0x7c, 0x0a, 0x8f, 0x9a, 0x9d, 0x8f, 0x72, 0x21, 0xd5, 0x17, 0x49, 0x1d, 0x7c, 0x06, 0xac, 0x49,
+	0xbd, 0x91, 0x4b, 0x15, 0x59, 0x7f, 0x94, 0xe0, 0x13, 0x78, 0xd8, 0x64, 0x2f, 0x97, 0x42, 0x6a,
+	0xda, 0xfa, 0x5f, 0x36, 0x11, 0x29, 0x5f, 0xd5, 0xac, 0x8b, 0x0c, 0x8e, 0x9a, 0xec, 0x95, 0xe0,
+	0xa9, 0x9e, 0xd3, 0xf6, 0xeb, 0xb3, 0x1f, 0x6b, 0x9f, 0xdc, 0xae, 0x7d, 0xf2, 0x7b, 0xed, 0x93,
+	0x6f, 0x1b, 0xdf, 0xb9, 0xdd, 0xf8, 0xce, 0xaf, 0x8d, 0xef, 0x7c, 0x1a, 0xcc, 0x12, 0x3d, 0xaf,
+	0xa6, 0x41, 0xa4, 0xb2, 0xb1, 0xcd, 0x7e, 0x6c, 0x52, 0x53, 0x72, 0x7c, 0xf7, 0x0b, 0xa6, 0x1d,
+	0x5b, 0xbd, 0xf8, 0x13, 0x00, 0x00, 0xff, 0xff, 0x61, 0x18, 0x63, 0xea, 0xb5, 0x02, 0x00, 0x00,
 }
 
 func (m *ListParam) Marshal() (dAtA []byte, err error) {
@@ -564,7 +301,7 @@ func (m *ListParam) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *RouteItem) Marshal() (dAtA []byte, err error) {
+func (m *DaprHandler) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -574,98 +311,74 @@ func (m *RouteItem) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *RouteItem) MarshalTo(dAtA []byte) (int, error) {
+func (m *DaprHandler) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *RouteItem) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DaprHandler) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Comment) > 0 {
-		i -= len(m.Comment)
-		copy(dAtA[i:], m.Comment)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Comment)))
-		i--
-		dAtA[i] = 0x6a
-	}
-	if len(m.Url) > 0 {
-		i -= len(m.Url)
-		copy(dAtA[i:], m.Url)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Url)))
-		i--
-		dAtA[i] = 0x62
-	}
-	if len(m.Permissions) > 0 {
-		for iNdEx := len(m.Permissions) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.Permissions[iNdEx])
-			copy(dAtA[i:], m.Permissions[iNdEx])
-			i = encodeVarintSdk(dAtA, i, uint64(len(m.Permissions[iNdEx])))
+	if len(m.Annotations) > 0 {
+		for k := range m.Annotations {
+			v := m.Annotations[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintSdk(dAtA, i, uint64(len(v)))
 			i--
-			dAtA[i] = 0x5a
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintSdk(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintSdk(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x3a
 		}
 	}
-	if m.IsRawResponse != 0 {
-		i = encodeVarintSdk(dAtA, i, uint64(m.IsRawResponse))
-		i--
-		dAtA[i] = 0x50
+	if len(m.Comments) > 0 {
+		for iNdEx := len(m.Comments) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Comments[iNdEx])
+			copy(dAtA[i:], m.Comments[iNdEx])
+			i = encodeVarintSdk(dAtA, i, uint64(len(m.Comments[iNdEx])))
+			i--
+			dAtA[i] = 0x32
+		}
 	}
-	if m.IsPublic != 0 {
-		i = encodeVarintSdk(dAtA, i, uint64(m.IsPublic))
-		i--
-		dAtA[i] = 0x48
-	}
-	if len(m.Origin) > 0 {
-		i -= len(m.Origin)
-		copy(dAtA[i:], m.Origin)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Origin)))
-		i--
-		dAtA[i] = 0x42
-	}
-	if len(m.HttpMethod) > 0 {
-		i -= len(m.HttpMethod)
-		copy(dAtA[i:], m.HttpMethod)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.HttpMethod)))
-		i--
-		dAtA[i] = 0x3a
-	}
-	if len(m.Endpoint) > 0 {
-		i -= len(m.Endpoint)
-		copy(dAtA[i:], m.Endpoint)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Endpoint)))
-		i--
-		dAtA[i] = 0x32
-	}
-	if len(m.Handler) > 0 {
-		i -= len(m.Handler)
-		copy(dAtA[i:], m.Handler)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.Handler)))
+	if len(m.Alias) > 0 {
+		i -= len(m.Alias)
+		copy(dAtA[i:], m.Alias)
+		i = encodeVarintSdk(dAtA, i, uint64(len(m.Alias)))
 		i--
 		dAtA[i] = 0x2a
 	}
-	if m.ModuleVersion != 0 {
-		i = encodeVarintSdk(dAtA, i, uint64(m.ModuleVersion))
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintSdk(dAtA, i, uint64(len(m.Name)))
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x22
 	}
-	if len(m.ModuleName) > 0 {
-		i -= len(m.ModuleName)
-		copy(dAtA[i:], m.ModuleName)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.ModuleName)))
+	if len(m.Module) > 0 {
+		i -= len(m.Module)
+		copy(dAtA[i:], m.Module)
+		i = encodeVarintSdk(dAtA, i, uint64(len(m.Module)))
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.App) > 0 {
-		i -= len(m.App)
-		copy(dAtA[i:], m.App)
-		i = encodeVarintSdk(dAtA, i, uint64(len(m.App)))
+	if len(m.PkgPath) > 0 {
+		i -= len(m.PkgPath)
+		copy(dAtA[i:], m.PkgPath)
+		i = encodeVarintSdk(dAtA, i, uint64(len(m.PkgPath)))
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.Id != 0 {
-		i = encodeVarintSdk(dAtA, i, uint64(m.Id))
+	if m.ModuleKind != 0 {
+		i = encodeVarintSdk(dAtA, i, uint64(m.ModuleKind))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -683,37 +396,6 @@ func encodeVarintSdk(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *EmptyRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *EmptyResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *SimpleResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Message)
-	if l > 0 {
-		n += 1 + l + sovSdk(uint64(l))
-	}
-	return n
-}
-
 func (m *ListParam) Size() (n int) {
 	if m == nil {
 		return 0
@@ -729,61 +411,44 @@ func (m *ListParam) Size() (n int) {
 	return n
 }
 
-func (m *RouteItem) Size() (n int) {
+func (m *DaprHandler) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Id != 0 {
-		n += 1 + sovSdk(uint64(m.Id))
+	if m.ModuleKind != 0 {
+		n += 1 + sovSdk(uint64(m.ModuleKind))
 	}
-	l = len(m.App)
+	l = len(m.PkgPath)
 	if l > 0 {
 		n += 1 + l + sovSdk(uint64(l))
 	}
-	l = len(m.ModuleName)
+	l = len(m.Module)
 	if l > 0 {
 		n += 1 + l + sovSdk(uint64(l))
 	}
-	if m.ModuleVersion != 0 {
-		n += 1 + sovSdk(uint64(m.ModuleVersion))
-	}
-	l = len(m.Handler)
+	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + sovSdk(uint64(l))
 	}
-	l = len(m.Endpoint)
+	l = len(m.Alias)
 	if l > 0 {
 		n += 1 + l + sovSdk(uint64(l))
 	}
-	l = len(m.HttpMethod)
-	if l > 0 {
-		n += 1 + l + sovSdk(uint64(l))
-	}
-	l = len(m.Origin)
-	if l > 0 {
-		n += 1 + l + sovSdk(uint64(l))
-	}
-	if m.IsPublic != 0 {
-		n += 1 + sovSdk(uint64(m.IsPublic))
-	}
-	if m.IsRawResponse != 0 {
-		n += 1 + sovSdk(uint64(m.IsRawResponse))
-	}
-	if len(m.Permissions) > 0 {
-		for _, s := range m.Permissions {
+	if len(m.Comments) > 0 {
+		for _, s := range m.Comments {
 			l = len(s)
 			n += 1 + l + sovSdk(uint64(l))
 		}
 	}
-	l = len(m.Url)
-	if l > 0 {
-		n += 1 + l + sovSdk(uint64(l))
-	}
-	l = len(m.Comment)
-	if l > 0 {
-		n += 1 + l + sovSdk(uint64(l))
+	if len(m.Annotations) > 0 {
+		for k, v := range m.Annotations {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovSdk(uint64(len(k))) + 1 + len(v) + sovSdk(uint64(len(v)))
+			n += mapEntrySize + 1 + sovSdk(uint64(mapEntrySize))
+		}
 	}
 	return n
 }
@@ -793,188 +458,6 @@ func sovSdk(x uint64) (n int) {
 }
 func sozSdk(x uint64) (n int) {
 	return sovSdk(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *EmptyRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowSdk
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: EmptyRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: EmptyRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipSdk(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *EmptyResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowSdk
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: EmptyResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: EmptyResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipSdk(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SimpleResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowSdk
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SimpleResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SimpleResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSdk
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Message = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipSdk(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *ListParam) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -1064,7 +547,7 @@ func (m *ListParam) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *RouteItem) Unmarshal(dAtA []byte) error {
+func (m *DaprHandler) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1087,17 +570,17 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: RouteItem: wiretype end group for non-group")
+			return fmt.Errorf("proto: DaprHandler: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RouteItem: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DaprHandler: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ModuleKind", wireType)
 			}
-			m.Id = 0
+			m.ModuleKind = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowSdk
@@ -1107,14 +590,14 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Id |= int64(b&0x7F) << shift
+				m.ModuleKind |= DaprModuleKind(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field App", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PkgPath", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1142,11 +625,11 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.App = string(dAtA[iNdEx:postIndex])
+			m.PkgPath = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ModuleName", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Module", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1174,30 +657,11 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ModuleName = string(dAtA[iNdEx:postIndex])
+			m.Module = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ModuleVersion", wireType)
-			}
-			m.ModuleVersion = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ModuleVersion |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Handler", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1225,11 +689,43 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Handler = string(dAtA[iNdEx:postIndex])
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Alias", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowSdk
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthSdk
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthSdk
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Alias = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Endpoint", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Comments", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1257,13 +753,13 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Endpoint = string(dAtA[iNdEx:postIndex])
+			m.Comments = append(m.Comments, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 7:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HttpMethod", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Annotations", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowSdk
@@ -1273,189 +769,118 @@ func (m *RouteItem) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthSdk
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthSdk
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.HttpMethod = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 8:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Origin", wireType)
+			if m.Annotations == nil {
+				m.Annotations = make(map[string]string)
 			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
+			var mapkey string
+			var mapvalue string
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowSdk
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
 				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSdk
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Origin = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 9:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field IsPublic", wireType)
-			}
-			m.IsPublic = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.IsPublic |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field IsRawResponse", wireType)
-			}
-			m.IsRawResponse = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.IsRawResponse |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 11:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Permissions", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSdk
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Permissions = append(m.Permissions, string(dAtA[iNdEx:postIndex]))
-			iNdEx = postIndex
-		case 12:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Url", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowSdk
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthSdk
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthSdk
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var stringLenmapvalue uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowSdk
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapvalue |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapvalue := int(stringLenmapvalue)
+					if intStringLenmapvalue < 0 {
+						return ErrInvalidLengthSdk
+					}
+					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
+					if postStringIndexmapvalue < 0 {
+						return ErrInvalidLengthSdk
+					}
+					if postStringIndexmapvalue > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
+					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipSdk(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthSdk
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSdk
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Url = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 13:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Comment", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowSdk
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSdk
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSdk
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Comment = string(dAtA[iNdEx:postIndex])
+			m.Annotations[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

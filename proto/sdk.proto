@@ -16,26 +16,20 @@ message ListParam {
   int64 pageSize = 2;  // 每页数量
 }
 
-// 按last primary key分页
-message NextParam {
-  int64 lastPk = 1;             // 上一次返回列表最后的主键
-  int64 pageSize = 2;           // 每页数量
-  SortDirection direction = 3;  // 排序是升序还是降序
+enum DaprModuleKind {
+  DaprModuleKindUnknown  = 0;
+  DaprModuleKindInvocation = 1;
+  DaprModuleKindEvent = 2;
+  DaprModuleKindDelayEvent = 3;
+  DaprModuleKindHealth = 4;
 }
 
-// 路由项
-message RouteItem {
-  int64 id = 1;
-  string app = 2;
-  string moduleName = 3;
-  int32 moduleVersion = 4;
-  string handler = 5;
-  string endpoint = 6;
-  string httpMethod = 7;
-  string origin = 8;
-  int32 isPublic = 9;
-  int32 isRawResponse = 10;
-  repeated string permissions = 11;
-  string url = 12;
-  string comment = 13;
+message DaprHandler {
+  DaprModuleKind moduleKind = 1; // 模块类型
+  string pkgPath = 2; // 包路径
+  string module = 3;  // 模块名
+  string name = 4;  // 处理函数名
+  string alias = 5; // 处理函数别名
+  map<string, string> annotations = 7; // 注解
+  repeated string comments = 6; // 注释
 }
