@@ -4,12 +4,6 @@ package hdget.protobuf;
 
 option go_package = "github.com/hdget/common/protobuf";
 
-// 排序方向
-enum SortDirection {
-  Asc = 0;
-  Desc = 1;
-}
-
 // 按limit分页
 message ListParam {
   int64 page = 1;      // 页码
@@ -32,4 +26,9 @@ message DaprHandler {
   string alias = 5; // 处理函数别名
   map<string, string> annotations = 7; // 注解
   repeated string comments = 6; // 注释
+}
+
+message UpdateRouteRequest {
+  string app = 1; // 应用名
+  repeated DaprHandler handlers = 2; // 源代码AST解析后保存的Dapr调用函数列表
 }
