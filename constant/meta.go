@@ -1,6 +1,7 @@
 package constant
 
 const (
+	MetaKeyAppId   = "hd-app-id"
 	MetaKeyClient  = "hd-client"
 	MetaKeyRelease = "hd-release"
 	MetaKeyTsn     = "hd-tsn" // tenant sn
