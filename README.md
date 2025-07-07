@@ -1,6 +1,4 @@
 # How to generate protobuf files
 ```
-# generate protobuf files
-```
-protoc --go_out=. --go-grpc_out=. proto/*.proto
+protoc --go_out=./protobuf --go_opt=module=github.com/hdget/common/protobuf proto/*.proto
 ```
