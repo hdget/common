@@ -1,13 +1,12 @@
 syntax = "proto3";
 
-package hdget.protobuf;
+package protobuf;
 
-option go_package = "github.com/hdget/common/protobuf";
+option go_package = "./protobuf";
 
-// 排序方向
-enum SortDirection {
-  Asc = 0;
-  Desc = 1;
+message Error {
+  int32 code = 1;
+  string msg = 2;
 }
 
 // 按limit分页
