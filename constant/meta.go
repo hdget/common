@@ -7,7 +7,7 @@ const (
 	MetaKeyTsn     = "hd-tsn" // tenant sn
 	MetaKeyTid     = "hd-tid" // decoded tenant id
 	MetaKeyUsn     = "hd-usn" // user sn
-	MetaKeyUid     = "hd-uid" // user sn
+	MetaKeyUid     = "hd-uid" // decoded user id
 	MetaKeyRsn     = "hd-rsn" // encoded role ids
 	MetaKeyCaller  = "dapr-caller-app-id"
 )
