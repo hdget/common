@@ -4,10 +4,9 @@ const (
 	MetaKeyAppId   = "hd-app-id"
 	MetaKeyClient  = "hd-client"
 	MetaKeyRelease = "hd-release"
-	MetaKeyTsn     = "hd-tsn" // tenant sn
-	MetaKeyTid     = "hd-tid" // decoded tenant id
-	MetaKeyUsn     = "hd-usn" // user sn
-	MetaKeyUid     = "hd-uid" // decoded user id
-	MetaKeyRsn     = "hd-rsn" // encoded role ids
+	MetaKeyTsn     = "hd-tsn"      // tenant sn
+	MetaKeyTid     = "hd-tid"      // tenant id
+	MetaKeyUid     = "hd-uid"      // user id
+	MetaKeyRoleIds = "hd-role-ids" // role ids
 	MetaKeyCaller  = "dapr-caller-app-id"
 )
