@@ -2,7 +2,7 @@ package intf
 
 import "github.com/hdget/common/protobuf"
 
-type DataAccessObject[businessObject, modelObject any, Condition any] interface {
+type DataAccessObject[businessObject any, modelObject any, Condition any] interface {
 	Create(businessObject) (int64, error)                                            // 创建对象
 	Edit(businessObject) error                                                       // 编辑对象
 	Delete(id int64) error                                                           // 删除对象
