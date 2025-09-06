@@ -5,8 +5,8 @@ import (
 )
 
 type BizSvcQueryResponse[BizObject any] struct {
-	Total int64       `json:"total"`
-	Items []BizObject `json:"items"`
+	Total int64
+	Items []BizObject
 }
 
 type BizSvcOperation[BizObject any] interface {
