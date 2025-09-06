@@ -1,8 +1,6 @@
-package intf
+package types
 
-import (
-	"log"
-)
+import "log"
 
 type LoggerProvider interface {
 	Provider

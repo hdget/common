@@ -1,8 +1,23 @@
-package intf
+package types
 
-import (
-	"context"
-	"github.com/hdget/common/types"
+import "context"
+
+type PublisherOption struct {
+	PublishDelayMessage bool
+}
+
+type SubscriberOption struct {
+	SubscribeDelayMessage bool
+}
+
+var (
+	DefaultPublisherOption = &PublisherOption{
+		PublishDelayMessage: false,
+	}
+
+	DefaultSubscriberOption = &SubscriberOption{
+		SubscribeDelayMessage: false,
+	}
 )
 
 // MessageQueueProvider
@@ -10,8 +25,8 @@ import (
 // 不同name的多个订阅者果订阅同一个topic,则所有订阅者都会收到消息
 type MessageQueueProvider interface {
 	Provider
-	NewPublisher(name string, args ...*types.PublisherOption) (MessageQueuePublisher, error)
-	NewSubscriber(name string, args ...*types.SubscriberOption) (MessageQueueSubscriber, error)
+	NewPublisher(name string, args ...*PublisherOption) (MessageQueuePublisher, error)
+	NewSubscriber(name string, args ...*SubscriberOption) (MessageQueueSubscriber, error)
 }
 
 type MessageQueuePublisher interface {
@@ -38,7 +53,7 @@ type MessageQueueSubscriber interface {
 	// When provided ctx is cancelled, subscriber will close subscribe and close output channel.
 	// Provided ctx is set to all produced messages.
 	// When Nack or Ack is called on the message, context of the message is canceled.
-	Subscribe(ctx context.Context, topic string) (<-chan *types.Message, error)
+	Subscribe(ctx context.Context, topic string) (<-chan *Message, error)
 	// Close closes all subscriptions with their output channels and flush offsets etc. when needed.
 	Close() error
 }
