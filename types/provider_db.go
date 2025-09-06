@@ -1,8 +1,6 @@
-package intf
+package types
 
-import (
-	"database/sql"
-)
+import "database/sql"
 
 type DbProvider interface {
 	Provider

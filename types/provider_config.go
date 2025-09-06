@@ -1,4 +1,4 @@
-package intf
+package types
 
 type ConfigProvider interface {
 	Provider

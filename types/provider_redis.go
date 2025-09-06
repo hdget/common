@@ -1,8 +1,6 @@
-package intf
+package types
 
-import (
-	"github.com/hdget/common/protobuf"
-)
+import "github.com/hdget/common/protobuf"
 
 type RedisCommand struct {
 	Name string
