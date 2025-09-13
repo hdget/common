@@ -129,11 +129,11 @@ func (m *Message) Nacked() <-chan struct{} {
 	return m.noAck
 }
 
-// Context returns the message's context. To change the context, use
+// Context returns the message's servicectx. To change the servicectx, use
 // SetContext.
 //
-// The returned context is always non-nil; it defaults to the
-// background context.
+// The returned servicectx is always non-nil; it defaults to the
+// background servicectx.
 func (m *Message) Context() context.Context {
 	if m.ctx != nil {
 		return m.ctx
@@ -141,7 +141,7 @@ func (m *Message) Context() context.Context {
 	return context.Background()
 }
 
-// SetContext sets provided context to the message.
+// SetContext sets provided servicectx to the message.
 func (m *Message) SetContext(ctx context.Context) {
 	m.ctx = ctx
 }

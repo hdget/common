@@ -52,7 +52,7 @@ type MessageQueueSubscriber interface {
 	//
 	// When provided ctx is cancelled, subscriber will close subscribe and close output channel.
 	// Provided ctx is set to all produced messages.
-	// When Nack or Ack is called on the message, context of the message is canceled.
+	// When Nack or Ack is called on the message, servicectx of the message is canceled.
 	Subscribe(ctx context.Context, topic string) (<-chan *Message, error)
 	// Close closes all subscriptions with their output channels and flush offsets etc. when needed.
 	Close() error
