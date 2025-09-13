@@ -1,9 +1,10 @@
 package meta
 
 import (
+	"strings"
+
 	"github.com/hdget/utils/convert"
 	"github.com/spf13/cast"
-	"strings"
 )
 
 type MetaReader interface {
@@ -11,10 +12,15 @@ type MetaReader interface {
 	GetInt64Slice(key string) []int64
 	GetString(key string) string
 	GetInt64(key string) int64
+	All() map[string]string
 }
 
 type metaReaderImpl struct {
 	metas map[string]string
+}
+
+func (c *metaReaderImpl) All() map[string]string {
+	return c.metas
 }
 
 func (c *metaReaderImpl) GetStringSlice(key string) []string {
