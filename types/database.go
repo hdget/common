@@ -31,7 +31,7 @@ type DbUpdate[BizObject any, ModelObject any] interface {
 }
 
 type DbFind[ModelObject any] interface {
-	Find(filters map[string]string) ([]ModelObject, error) // 查找某个对象
+	Find(filters map[string]string) (ModelObject, error) // 查找某个对象
 }
 
 // DbDelete 删除
