@@ -49,17 +49,15 @@ func (r *metaCtxReaderImpl) GetTsn() string {
 //}
 
 func (r *metaCtxReaderImpl) getString(key string) string {
-	v, exists := r.metas[key]
-	if !exists {
-		return ""
+	if v, exists := r.metas[key]; exists {
+		return v
 	}
-	return v
+	return ""
 }
 
 func (r *metaCtxReaderImpl) getInt64(key string) int64 {
-	v, exists := r.metas[key]
-	if !exists {
-		return 0
+	if v, exists := r.metas[key]; exists {
+		return cast.ToInt64(v)
 	}
-	return cast.ToInt64(v)
+	return 0
 }

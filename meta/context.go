@@ -9,9 +9,8 @@ func AddMetaToContext(ctx context.Context, metas map[string]string) context.Cont
 }
 
 func GetMetaFromContext(ctx context.Context) map[string]string {
-	kvs, ok := ctx.Value(ctxKeyMeta{}).(map[string]string)
-	if ok {
+	if kvs, ok := ctx.Value(ctxKeyMeta{}).(map[string]string); ok {
 		return kvs
 	}
-	return make(map[string]string)
+	return nil
 }
