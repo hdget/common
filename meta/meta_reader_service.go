@@ -2,17 +2,16 @@ package meta
 
 import (
 	"context"
-	"github.com/hdget/common/servicectx"
 )
 
-type serviceMetaReaderImpl struct {
-	*metaReaderImpl
+type serviceCtxReaderImpl struct {
+	*metaCtxReaderImpl
 }
 
 func FromServiceContext(ctx context.Context) MetaReader {
-	return &serviceMetaReaderImpl{
-		metaReaderImpl: &metaReaderImpl{
-			metas: servicectx.GetMeta(ctx),
+	return &serviceCtxReaderImpl{
+		metaCtxReaderImpl: &metaCtxReaderImpl{
+			metas: GetMetaFromContext(ctx),
 		},
 	}
 }
