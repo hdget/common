@@ -11,7 +11,7 @@ type serviceCtxReaderImpl struct {
 func FromServiceContext(ctx context.Context) MetaReader {
 	return &serviceCtxReaderImpl{
 		metaCtxReaderImpl: &metaCtxReaderImpl{
-			metas: GetMetaFromContext(ctx),
+			metaMap: GetMetaFromContext(ctx),
 		},
 	}
 }
