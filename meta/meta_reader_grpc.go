@@ -2,11 +2,12 @@ package meta
 
 import (
 	"context"
+
 	"google.golang.org/grpc/metadata"
 )
 
-type grpcMetaReaderImpl struct {
-	*metaReaderImpl
+type grpcCtxReaderImpl struct {
+	*metaCtxReaderImpl
 }
 
 func FromGrpcContext(ctx context.Context) MetaReader {
@@ -18,15 +19,15 @@ func FromGrpcContext(ctx context.Context) MetaReader {
 				metas[key] = values[0]
 			}
 		}
-		return &grpcMetaReaderImpl{
-			metaReaderImpl: &metaReaderImpl{
+		return &grpcCtxReaderImpl{
+			metaCtxReaderImpl: &metaCtxReaderImpl{
 				metas: metas,
 			},
 		}
 	}
 
-	return &grpcMetaReaderImpl{
-		metaReaderImpl: &metaReaderImpl{
+	return &grpcCtxReaderImpl{
+		metaCtxReaderImpl: &metaCtxReaderImpl{
 			metas: make(map[string]string),
 		},
 	}

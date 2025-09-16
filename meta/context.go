@@ -1,16 +1,14 @@
-package servicectx
+package meta
 
-import (
-	"context"
-)
+import "context"
 
 type ctxKeyMeta struct{}
 
-func addMeta(ctx context.Context, metas map[string]string) context.Context {
+func AddMetaToContext(ctx context.Context, metas map[string]string) context.Context {
 	return context.WithValue(ctx, ctxKeyMeta{}, metas)
 }
 
-func GetMeta(ctx context.Context) map[string]string {
+func GetMetaFromContext(ctx context.Context) map[string]string {
 	kvs, ok := ctx.Value(ctxKeyMeta{}).(map[string]string)
 	if ok {
 		return kvs
