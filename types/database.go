@@ -1,12 +1,14 @@
 package types
 
-import "github.com/hdget/common/protobuf"
+import (
+	"github.com/hdget/common/protobuf"
+)
 
 // Database
 
 type DbOperation[BizObject any, ModelObject any, Condition any] interface {
 	DbCreate[BizObject, ModelObject]
-	DbRetrieve[BizObject, ModelObject, Condition]
+	DbRetrieve[ModelObject, Condition]
 	DbUpdate[BizObject, ModelObject]
 	DbDelete
 }
@@ -17,10 +19,11 @@ type DbCreate[BizObject any, ModelObject any] interface {
 }
 
 // DbRetrieve 读取操作:R
-type DbRetrieve[BizObject any, ModelObject any, Condition any] interface {
+type DbRetrieve[ModelObject any, Condition any] interface {
 	Get(id int64) (ModelObject, error)                                                  // 获取对象
+	Find(filters map[string]string) (ModelObject, error)                                // 查找某个对象
 	Count(filters map[string]string) (int64, error)                                     // 统计对象
-	List(filters map[string]string, list ...*protobuf.ListParam) ([]ModelObject, error) // 列出对象
+	List(filters map[string]string, list ...*protobuf.ListParam) ([]ModelObject, error) // 列出对象, list不传的时候获取所有对象
 	GetQueryConditions(filters map[string]string) []Condition                           // 获取查询条件
 }
 
@@ -28,10 +31,6 @@ type DbRetrieve[BizObject any, ModelObject any, Condition any] interface {
 type DbUpdate[BizObject any, ModelObject any] interface {
 	Edit(bizObj BizObject) error                                        // 编辑对象
 	Update(modelObj ModelObject, columns map[string]any) (int64, error) // 更新某个字段
-}
-
-type DbFind[ModelObject any] interface {
-	Find(filters map[string]string) (ModelObject, error) // 查找某个对象
 }
 
 // DbDelete 删除
@@ -48,7 +47,7 @@ type DbBulkRetrieve[ModelObject any] interface {
 
 type RefDbOperation[RefBizObject any, RefModelObject any, Condition any] interface {
 	RefDbCreate[RefBizObject, RefModelObject]
-	RefDbRetrieve[RefBizObject, RefModelObject, Condition]
+	RefDbRetrieve[RefModelObject, Condition]
 	RefDbUpdate[RefBizObject, RefModelObject]
 	RefDbDelete
 }
@@ -59,8 +58,9 @@ type RefDbCreate[RefBizObject any, RefModelObject any] interface {
 }
 
 // RefDbRetrieve 读取关联对象操作:R
-type RefDbRetrieve[RefBizObject any, RefModelObject any, Condition any] interface {
+type RefDbRetrieve[RefModelObject any, Condition any] interface {
 	Get(id, refId int64) (RefModelObject, error)                                                           // 获取关联对象DAO
+	Find(id int64, refObjFilters map[string]string) (RefModelObject, error)                                // 查找某个对象
 	Count(id int64, refObjFilters map[string]string) (int64, error)                                        // 统计关联对象DAO
 	List(id int64, refObjFilters map[string]string, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
 	GetQueryConditions(id int64, refObjFilters map[string]string) []Condition                              // 获取关联对象DAO
@@ -75,10 +75,6 @@ type RefDbUpdate[RefBizObject any, RefModelObject any] interface {
 // RefDbDelete 删除关联对象
 type RefDbDelete interface {
 	Delete(id int64, refId int64) error // 删除关联对象DAO
-}
-
-type RefDbFind[ModelObject any] interface {
-	Find(id int64, refObjFilters map[string]string) (ModelObject, error) // 查找某个对象
 }
 
 // RefDbBulkRetrieve 批量读取关联对象
