@@ -19,6 +19,7 @@ type Context interface {
 type contextImpl struct {
 	metadata map[string]string
 	tx       any
+	appId    string
 	tid      int64 // 租户ID, 高频对象缓存
 	uid      int64 // 当前用户ID, 高频对象缓存
 }
@@ -74,6 +75,13 @@ func (c *contextImpl) Uid() int64 {
 		return c.uid
 	}
 	return c.Meta().GetInt64(constant.MetaKeyUid)
+}
+
+func (c *contextImpl) AppId() string {
+	if c.appId != "" {
+		return c.appId
+	}
+	return c.Meta().GetString(constant.MetaKeyAppId)
 }
 
 type debugContextImpl struct {
