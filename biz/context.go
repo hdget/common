@@ -14,6 +14,7 @@ type Context interface {
 	GetTx() any
 	Tid() int64
 	Uid() int64
+	AppId() string
 }
 
 type contextImpl struct {
