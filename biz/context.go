@@ -2,37 +2,63 @@ package biz
 
 import (
 	"context"
+	"strconv"
+	"sync"
 
-	"github.com/hdget/common/constant"
-	"github.com/spf13/cast"
 	"google.golang.org/grpc/metadata"
 )
 
 type Context interface {
-	Meta() MetaReader
-	SetTx(tx any)
-	GetTx() any
-	Tid() int64
-	Uid() int64
-	AppId() string
+	WithValue(kvs ...any) Context // 添加键值
+	Value(key any) (any, bool)    // 获取键值
+	MD() map[string][]string      // 转换成GRPC metadata类型
+	Tid() int64                   // 获取租户ID
+	Uid() int64                   // 获取用户ID
+	AppId() string                // 获取应用ID
 }
 
 type contextImpl struct {
-	metadata map[string]string
-	tx       any
-	appId    string
-	tid      int64 // 租户ID, 高频对象缓存
-	uid      int64 // 当前用户ID, 高频对象缓存
+	kvStore sync.Map
 }
 
-func NewContext(metaKvs ...string) Context {
-	return &contextImpl{
-		metadata: toMap(metaKvs...),
+const (
+	ContextKeyAppId         = "hd-app-id"
+	ContextKeyClient        = "hd-client"
+	ContextKeyRelease       = "hd-release"
+	ContextKeyTsn           = "hd-tsn"      // tenant sn
+	ContextKeyTid           = "hd-tid"      // tenant id
+	ContextKeyUid           = "hd-uid"      // user id
+	ContextKeyRoleIds       = "hd-role-ids" // role ids
+	ContextKeyCaller        = "dapr-caller-app-id"
+	ContextKeyDbTransaction = "hd-db-tx"
+)
+
+func NewContext(kvs ...any) Context {
+	ctx := &contextImpl{
+		kvStore: sync.Map{},
 	}
+	if len(kvs) > 0 && len(kvs)%2 == 0 {
+		for i := 0; i < len(kvs); i += 2 {
+			ctx.kvStore.Store(kvs[i], kvs[i+1])
+		}
+	}
+	return ctx
+}
+
+// WithTidContext adds tid
+func WithTidContext(parent Context, tid int64) Context {
+	return parent.WithValue(ContextKeyTid, tid)
+}
+
+// WithTxContext adds db executor
+func WithTxContext(parent Context, tx any) Context {
+	return parent.WithValue(ContextKeyDbTransaction, tx)
 }
 
 func NewFromIncomingGrpcContext(ctx context.Context) Context {
-	c := &contextImpl{}
+	c := &contextImpl{
+		kvStore: sync.Map{},
+	}
 
 	// 尝试从grpc context中获取meta信息
 	md, exists := metadata.FromIncomingContext(ctx)
@@ -40,89 +66,77 @@ func NewFromIncomingGrpcContext(ctx context.Context) Context {
 		return c
 	}
 
-	if len(md) > 0 {
-		c.metadata = make(map[string]string)
-		for key, value := range md {
-			c.metadata[key] = value[0]
+	for key, value := range md {
+		switch key {
+		case ContextKeyTid, ContextKeyUid: // int64
+			v, _ := strconv.ParseInt(value[0], 10, 64)
+			c.kvStore.Store(key, v)
+		default:
+			c.kvStore.Store(key, value[0])
 		}
 	}
-
-	return c
-}
-
-func (c *contextImpl) Meta() MetaReader {
-	return &metaReaderImpl{
-		metaMap: c.metadata,
-	}
-}
-
-func (c *contextImpl) SetTx(tx any) {
-	c.tx = tx
-}
-
-func (c *contextImpl) GetTx() any {
-	return c.tx
-}
-
-func (c *contextImpl) Tid() int64 {
-	if c.tid > 0 {
-		return c.tid
-	}
-	return c.Meta().GetInt64(constant.MetaKeyTid)
-}
-
-func (c *contextImpl) Uid() int64 {
-	if c.uid > 0 {
-		return c.uid
-	}
-	return c.Meta().GetInt64(constant.MetaKeyUid)
-}
-
-func (c *contextImpl) AppId() string {
-	if c.appId != "" {
-		return c.appId
-	}
-	return c.Meta().GetString(constant.MetaKeyAppId)
-}
-
-type debugContextImpl struct {
-	*contextImpl
-}
-
-func NewDebugContext(tid int64, kvs ...string) Context {
-	c := &debugContextImpl{
-		contextImpl: &contextImpl{
-			metadata: map[string]string{
-				constant.MetaKeyTid: cast.ToString(tid),
-			},
-		},
-	}
-
-	for key, value := range toMap(kvs...) {
-		c.metadata[key] = value
-	}
-
 	return c
 }
 
 func NewOutgoingGrpcContext(ctx Context) context.Context {
-	bizMetaKvs := ctx.Meta().GetAll()
-
-	md := make(map[string][]string, len(bizMetaKvs))
-	for k, v := range bizMetaKvs {
-		md[k] = []string{v}
-	}
-	return metadata.NewOutgoingContext(context.Background(), md)
+	return metadata.NewOutgoingContext(context.Background(), ctx.MD())
 }
 
-func toMap(kvs ...string) map[string]string {
-	if len(kvs) == 0 || len(kvs)%2 == 1 {
-		return nil
+func (c *contextImpl) WithValue(kvs ...any) Context {
+	if len(kvs) > 0 && len(kvs)%2 == 0 {
+		for i := 0; i < len(kvs); i += 2 {
+			c.kvStore.Store(kvs[i], kvs[i+1])
+		}
 	}
+	return c
+}
 
-	result := make(map[string]string, len(kvs)/2)
-	for i := 0; i < len(kvs); i += 2 {
-		result[kvs[i]] = kvs[i+1]
+func (c *contextImpl) Value(key any) (any, bool) {
+	return c.kvStore.Load(key)
+}
+
+func (c *contextImpl) MD() map[string][]string {
+	md := make(map[string][]string)
+	c.kvStore.Range(func(key, value any) bool {
+		if k, ok := key.(string); ok {
+			switch v := value.(type) {
+			case string:
+				md[k] = []string{v}
+			case int64:
+				md[k] = []string{strconv.FormatInt(v, 10)}
+			default:
+				// 对于未处理类型，使用fallback方案
+				md[k] = []string{""}
+			}
+		}
+		return true
+	})
+	return md
+}
+
+func (c *contextImpl) Tid() int64 {
+	if v, exists := c.kvStore.Load(ContextKeyTid); exists {
+		if tid, ok := v.(int64); ok {
+			return tid
+		}
 	}
-	return result
+	return 0
+}
+
+func (c *contextImpl) Uid() int64 {
+	if v, exists := c.kvStore.Load(ContextKeyUid); exists {
+		if uid, ok := v.(int64); ok {
+			return uid
+		}
+	}
+	return 0
+}
+
+func (c *contextImpl) AppId() string {
+	if v, exists := c.kvStore.Load(ContextKeyAppId); exists {
+		if appId, ok := v.(string); ok {
+			return appId
+		}
+	}
+	return ""
 }
