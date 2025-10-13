@@ -14,6 +14,7 @@ type Context interface {
 	MD() map[string][]string      // 转换成GRPC metadata类型
 	Tid() int64                   // 获取租户ID
 	Uid() int64                   // 获取用户ID
+	Usn() string                  // 获取用户SN
 	AppId() string                // 获取应用ID
 }
 
@@ -28,6 +29,7 @@ const (
 	ContextKeyTsn           = "hd-tsn"      // tenant sn
 	ContextKeyTid           = "hd-tid"      // tenant id
 	ContextKeyUid           = "hd-uid"      // user id
+	ContextKeyUsn           = "hd-usn"      // user sn
 	ContextKeyRoleIds       = "hd-role-ids" // role ids
 	ContextKeyCaller        = "dapr-caller-app-id"
 	ContextKeyDbTransaction = "hd-db-tx"
@@ -134,6 +136,15 @@ func (c *contextImpl) Uid() int64 {
 
 func (c *contextImpl) AppId() string {
 	if v, exists := c.kvStore.Load(ContextKeyAppId); exists {
+		if appId, ok := v.(string); ok {
+			return appId
+		}
+	}
+	return ""
+}
+
+func (c *contextImpl) Usn() string {
+	if v, exists := c.kvStore.Load(ContextKeyUsn); exists {
 		if appId, ok := v.(string); ok {
 			return appId
 		}

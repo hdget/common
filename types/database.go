@@ -29,8 +29,8 @@ type DbRetrieve[ModelObject any, Condition any] interface {
 
 // DbUpdate 更新：U
 type DbUpdate[BizObject any, ModelObject any] interface {
-	Edit(bizObj BizObject) error                                        // 编辑对象
-	Update(modelObj ModelObject, columns map[string]any) (int64, error) // 更新某个字段
+	Edit(bizObj BizObject) error       // 编辑对象
+	Update(modelObj ModelObject) error // 更新某个字段
 }
 
 // DbDelete 删除
@@ -68,8 +68,8 @@ type RefDbRetrieve[RefModelObject any, Condition any] interface {
 
 // RefDbUpdate 更新关联对象：U
 type RefDbUpdate[RefBizObject any, RefModelObject any] interface {
-	Edit(id int64, refBizObj RefBizObject) error                              // 编辑关联对象DAO
-	Update(refModelObj RefModelObject, columns map[string]any) (int64, error) // 更新关联对象DAO某个字段
+	Edit(id int64, refBizObj RefBizObject) error // 编辑数据库关联对象DAO
+	Update(refModelObj RefModelObject) error     // 更新数据库关联对象
 }
 
 // RefDbDelete 删除关联对象
