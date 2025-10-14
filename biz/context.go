@@ -3,6 +3,7 @@ package biz
 import (
 	"context"
 	"strconv"
+	"strings"
 	"sync"
 
 	"google.golang.org/grpc/metadata"
@@ -16,6 +17,7 @@ type Context interface {
 	Uid() int64                   // 获取用户ID
 	Usn() string                  // 获取用户SN
 	AppId() string                // 获取应用ID
+	RoleIds() []int64             // 获取角色ID列表
 }
 
 type contextImpl struct {
@@ -72,6 +74,13 @@ func NewFromIncomingGrpcContext(ctx context.Context) Context {
 		switch key {
 		case ContextKeyTid, ContextKeyUid: // int64
 			v, _ := strconv.ParseInt(value[0], 10, 64)
+			c.kvStore.Store(key, v)
+		case ContextKeyRoleIds:
+			strIds := strings.Split(value[0], ",")
+			v := make([]int64, len(strIds))
+			for i, s := range strIds {
+				v[i], _ = strconv.ParseInt(s, 10, 64)
+			}
 			c.kvStore.Store(key, v)
 		default:
 			c.kvStore.Store(key, value[0])
@@ -150,4 +159,13 @@ func (c *contextImpl) Usn() string {
 		}
 	}
 	return ""
+}
+
+func (c *contextImpl) RoleIds() []int64 {
+	if v, exists := c.kvStore.Load(ContextKeyRoleIds); exists {
+		if roleIds, ok := v.([]int64); ok {
+			return roleIds
+		}
+	}
+	return nil
 }
