@@ -21,7 +21,6 @@ type DbCreate[BizObject any, ModelObject any] interface {
 // DbRetrieve 读取操作:R
 type DbRetrieve[ModelObject any, Condition any] interface {
 	Get(id int64) (ModelObject, error)                                                  // 获取对象
-	Find(filters map[string]string) (ModelObject, error)                                // 查找某个对象
 	Count(filters map[string]string) (int64, error)                                     // 统计对象
 	List(filters map[string]string, list ...*protobuf.ListParam) ([]ModelObject, error) // 列出对象, list不传的时候获取所有对象
 	GetQueryConditions(filters map[string]string) []Condition                           // 获取查询条件
