@@ -27,7 +27,7 @@ type ServiceRetrieve[BizObject any] interface {
 }
 
 type ServiceUpdate[BizObject any] interface {
-	Edit(ctx biz.Context, BizObject any) error // 编辑业务对象
+	Edit(ctx biz.Context, bizObject BizObject) error // 编辑业务对象
 }
 
 type ServiceDelete interface {
