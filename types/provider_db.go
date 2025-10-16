@@ -10,10 +10,15 @@ type DbProvider interface {
 	By(name string) DbClient
 }
 
-type DbClient interface {
+type DbExecutor interface {
 	Exec(query string, args ...interface{}) (sql.Result, error)
 	Query(query string, args ...interface{}) (*sql.Rows, error)
 	QueryRow(query string, args ...interface{}) *sql.Row
+}
+
+type DbClient interface {
+	DbExecutor
+	
 	Get(dest interface{}, query string, args ...interface{}) error
 	Select(dest interface{}, query string, args ...interface{}) error
 	Rebind(query string) string
