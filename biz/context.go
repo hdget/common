@@ -11,6 +11,8 @@ import (
 
 type Context interface {
 	WithValue(kvs ...any) Context // 添加键值
+	WithTid(tid int64) Context    // 快捷函数设置tid
+	WithTx(tx any) Context        // 快捷函数设置tx
 	Value(key any) (any, bool)    // 获取键值
 	MD() map[string][]string      // 转换成GRPC metadata类型
 	Tid() int64                   // 获取租户ID
@@ -24,19 +26,6 @@ type contextImpl struct {
 	kvStore sync.Map
 }
 
-const (
-	ContextKeyAppId         = "hd-app-id"
-	ContextKeyClient        = "hd-client"
-	ContextKeyRelease       = "hd-release"
-	ContextKeyTsn           = "hd-tsn"      // tenant sn
-	ContextKeyTid           = "hd-tid"      // tenant id
-	ContextKeyUid           = "hd-uid"      // user id
-	ContextKeyUsn           = "hd-usn"      // user sn
-	ContextKeyRoleIds       = "hd-role-ids" // role ids
-	ContextKeyCaller        = "dapr-caller-app-id"
-	ContextKeyDbTransaction = "hd-db-tx"
-)
-
 func NewContext(kvs ...any) Context {
 	ctx := &contextImpl{
 		kvStore: sync.Map{},
@@ -47,16 +36,6 @@ func NewContext(kvs ...any) Context {
 		}
 	}
 	return ctx
-}
-
-// WithTidContext adds tid
-func WithTidContext(parent Context, tid int64) Context {
-	return parent.WithValue(ContextKeyTid, tid)
-}
-
-// WithTxContext adds db executor
-func WithTxContext(parent Context, tx any) Context {
-	return parent.WithValue(ContextKeyDbTransaction, tx)
 }
 
 func NewFromIncomingGrpcContext(ctx context.Context) Context {
@@ -91,6 +70,16 @@ func NewFromIncomingGrpcContext(ctx context.Context) Context {
 
 func NewOutgoingGrpcContext(ctx Context) context.Context {
 	return metadata.NewOutgoingContext(context.Background(), ctx.MD())
+}
+
+// WithTid adds tid
+func (c *contextImpl) WithTid(tid int64) Context {
+	return c.WithValue(ContextKeyTid, tid)
+}
+
+// WithTx adds db executor
+func (c *contextImpl) WithTx(tx any) Context {
+	return c.WithValue(ContextKeyDbTransaction, tx)
 }
 
 func (c *contextImpl) WithValue(kvs ...any) Context {

@@ -9,7 +9,7 @@ import (
 type DbOperation[BizObject any, ModelObject any, Condition any] interface {
 	DbCreate[BizObject, ModelObject]
 	DbRetrieve[ModelObject, Condition]
-	DbUpdate[BizObject, ModelObject]
+	DbUpdate[ModelObject]
 	DbDelete
 }
 
@@ -27,9 +27,12 @@ type DbRetrieve[ModelObject any, Condition any] interface {
 }
 
 // DbUpdate 更新：U
-type DbUpdate[BizObject any, ModelObject any] interface {
-	Edit(bizObj BizObject) error       // 编辑对象
+type DbUpdate[ModelObject any] interface {
 	Update(modelObj ModelObject) error // 更新某个字段
+}
+
+type DbEdit[BizObject any] interface {
+	Edit(bizObj BizObject) error // 编辑对象
 }
 
 // DbDelete 删除
@@ -47,7 +50,7 @@ type DbBulkRetrieve[ModelObject any] interface {
 type RefDbOperation[RefBizObject any, RefModelObject any, Condition any] interface {
 	RefDbCreate[RefBizObject, RefModelObject]
 	RefDbRetrieve[RefModelObject, Condition]
-	RefDbUpdate[RefBizObject, RefModelObject]
+	RefDbUpdate[RefModelObject]
 	RefDbDelete
 }
 
@@ -59,16 +62,18 @@ type RefDbCreate[RefBizObject any, RefModelObject any] interface {
 // RefDbRetrieve 读取关联对象操作:R
 type RefDbRetrieve[RefModelObject any, Condition any] interface {
 	Get(id, refId int64) (RefModelObject, error)                                                           // 获取关联对象DAO
-	Find(id int64, refObjFilters map[string]string) (RefModelObject, error)                                // 查找某个对象
 	Count(id int64, refObjFilters map[string]string) (int64, error)                                        // 统计关联对象DAO
 	List(id int64, refObjFilters map[string]string, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
 	GetQueryConditions(id int64, refObjFilters map[string]string) []Condition                              // 获取关联对象DAO
 }
 
 // RefDbUpdate 更新关联对象：U
-type RefDbUpdate[RefBizObject any, RefModelObject any] interface {
+type RefDbUpdate[RefModelObject any] interface {
+	Update(refModelObj RefModelObject) error // 更新数据库关联对象
+}
+
+type RefDbEdit[RefBizObject any] interface {
 	Edit(id int64, refBizObj RefBizObject) error // 编辑数据库关联对象DAO
-	Update(refModelObj RefModelObject) error     // 更新数据库关联对象
 }
 
 // RefDbDelete 删除关联对象
