@@ -48,8 +48,8 @@ func (t *safeTxImpl) ReachRoot() bool {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
-	// 为0表示需要Commit Or Rollback
-	return t.count <= 0
+	// 如果为1则表示到达最外层，需要Commit Or Rollback
+	return t.count == 1
 }
 
 func (t *safeTxImpl) GetTx() any {
