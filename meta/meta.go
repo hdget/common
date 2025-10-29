@@ -6,15 +6,14 @@ import (
 )
 
 const (
-	KeyAppId   = "hd-app-id"   // 应用ID
-	KeyClient  = "hd-client"   // 客户端
-	KeyRelease = "hd-release"  // 版本号
-	KeyTsn     = "hd-tsn"      // tenant sn
-	KeyTid     = "hd-tid"      // tenant id
-	KeyUid     = "hd-uid"      // user id
-	KeyUsn     = "hd-usn"      // user sn
-	KeyRoleIds = "hd-role-ids" // role ids
-	KeyCaller  = "dapr-caller-app-id"
+	KeyAppId       = "hd-app-id"       // 应用ID
+	KeyApiEndpoint = "hd-api-endpoint" // API接入端
+	KeyRelease     = "hd-release"      // 版本号
+	KeyTid         = "hd-tid"          // tenant id
+	KeyUid         = "hd-uid"          // user id
+	KeyUsn         = "hd-usn"          // user sn
+	KeyRoleIds     = "hd-role-ids"     // role ids
+	KeyCaller      = "dapr-caller-app-id"
 )
 
 type MetaData interface {
