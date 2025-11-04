@@ -11,10 +11,11 @@ import (
 
 type Context interface {
 	MetaData() meta.MetaData // 元数据
-	Transactor() transactor  // 数据库Trasactor相关
+	Transactor() transactor  // 数据库Transactor相关
 	Tid() int64              // 获取租户ID
 	Uid() int64              // 获取用户ID
 	AppId() string           // 获取应用ID
+	Client() string          // 获取访问客户端
 	RoleIds() []int64        // 获取角色ID列表
 }
 
@@ -24,6 +25,7 @@ type contextImpl struct {
 	tid        int64   // 缓存租户ID提升效率
 	uid        int64   // 缓存用户ID提升效率
 	appId      string  // 缓存应用ID提升效率
+	client     string  // 缓存访问客户端
 	roleIds    []int64 // 缓存角色列表提升效率
 }
 
@@ -98,6 +100,13 @@ func (c *contextImpl) Uid() int64 {
 func (c *contextImpl) AppId() string {
 	if c.appId == "" {
 		c.appId = c.metadata.GetString(meta.KeyAppId)
+	}
+	return c.appId
+}
+
+func (c *contextImpl) Client() string {
+	if c.client == "" {
+		c.client = c.metadata.GetString(meta.KeyClient)
 	}
 	return c.appId
 }
