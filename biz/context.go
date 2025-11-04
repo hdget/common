@@ -108,7 +108,7 @@ func (c *contextImpl) Client() string {
 	if c.client == "" {
 		c.client = c.metadata.GetString(meta.KeyClient)
 	}
-	return c.appId
+	return c.client
 }
 
 func (c *contextImpl) RoleIds() []int64 {
