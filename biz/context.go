@@ -15,7 +15,7 @@ type Context interface {
 	Tid() int64              // 获取租户ID
 	Uid() int64              // 获取用户ID
 	AppKey() string          // 获取应用ID
-	Client() string          // 获取访问客户端
+	Source() string          // 获取访问客户端
 	RoleIds() []int64        // 获取角色ID列表
 }
 
@@ -25,7 +25,7 @@ type contextImpl struct {
 	tid        int64   // 缓存租户ID提升效率
 	uid        int64   // 缓存用户ID提升效率
 	appKey     string  // 缓存应用Key提升效率
-	client     string  // 缓存访问客户端
+	source     string  // 缓存访问客户端
 	roleIds    []int64 // 缓存角色列表提升效率
 }
 
@@ -104,11 +104,11 @@ func (c *contextImpl) AppKey() string {
 	return c.appKey
 }
 
-func (c *contextImpl) Client() string {
-	if c.client == "" {
-		c.client = c.metadata.GetString(meta.KeyClient)
+func (c *contextImpl) Source() string {
+	if c.source == "" {
+		c.source = c.metadata.GetString(meta.KeySource)
 	}
-	return c.client
+	return c.source
 }
 
 func (c *contextImpl) RoleIds() []int64 {
