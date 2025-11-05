@@ -25,7 +25,7 @@ type contextImpl struct {
 	tid        int64   // 缓存租户ID提升效率
 	uid        int64   // 缓存用户ID提升效率
 	appKey     string  // 缓存应用Key提升效率
-	source     string  // 缓存访问客户端
+	source     string  // 缓存请求来源
 	roleIds    []int64 // 缓存角色列表提升效率
 }
 
