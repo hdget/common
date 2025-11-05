@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	KeyAppId   = "hd-app-id"   // 应用ID
+	KeyAppKey  = "hd-app-key"  // 应用ID
 	KeyClient  = "hd-client"   // 客户端
 	KeyRelease = "hd-release"  // 版本号
 	KeyTid     = "hd-tid"      // tenant id
