@@ -15,7 +15,7 @@ type Context interface {
 	Tid() int64              // 获取租户ID
 	Uid() int64              // 获取用户ID
 	AppKey() string          // 获取应用ID
-	Source() string          // 获取访问客户端
+	Source() string          // 获取请求来源
 	RoleIds() []int64        // 获取角色ID列表
 }
 
