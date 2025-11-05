@@ -14,7 +14,7 @@ type Context interface {
 	Transactor() transactor  // 数据库Transactor相关
 	Tid() int64              // 获取租户ID
 	Uid() int64              // 获取用户ID
-	AppId() string           // 获取应用ID
+	AppKey() string          // 获取应用ID
 	Client() string          // 获取访问客户端
 	RoleIds() []int64        // 获取角色ID列表
 }
@@ -24,7 +24,7 @@ type contextImpl struct {
 	transactor transactor
 	tid        int64   // 缓存租户ID提升效率
 	uid        int64   // 缓存用户ID提升效率
-	appId      string  // 缓存应用ID提升效率
+	appKey     string  // 缓存应用Key提升效率
 	client     string  // 缓存访问客户端
 	roleIds    []int64 // 缓存角色列表提升效率
 }
@@ -97,11 +97,11 @@ func (c *contextImpl) Uid() int64 {
 	return c.uid
 }
 
-func (c *contextImpl) AppId() string {
-	if c.appId == "" {
-		c.appId = c.metadata.GetString(meta.KeyAppId)
+func (c *contextImpl) AppKey() string {
+	if c.appKey == "" {
+		c.appKey = c.metadata.GetString(meta.KeyAppKey)
 	}
-	return c.appId
+	return c.appKey
 }
 
 func (c *contextImpl) Client() string {
