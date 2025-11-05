@@ -15,7 +15,7 @@ type Context interface {
 	Tid() int64              // 获取租户ID
 	Uid() int64              // 获取用户ID
 	AppKey() string          // 获取应用ID
-	Source() string          // 获取访问客户端
+	Source() string          // 获取请求来源
 	RoleIds() []int64        // 获取角色ID列表
 }
 
@@ -25,7 +25,7 @@ type contextImpl struct {
 	tid        int64   // 缓存租户ID提升效率
 	uid        int64   // 缓存用户ID提升效率
 	appKey     string  // 缓存应用Key提升效率
-	source     string  // 缓存访问客户端
+	source     string  // 缓存请求来源
 	roleIds    []int64 // 缓存角色列表提升效率
 }
 
