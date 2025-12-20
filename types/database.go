@@ -20,10 +20,10 @@ type DbCreate[BizObject any, ModelObject any] interface {
 
 // DbRetrieve 读取操作:R
 type DbRetrieve[ModelObject any, Condition any] interface {
-	Get(id int64) (ModelObject, error)                                                  // 获取对象
-	Count(filters map[string]string) (int64, error)                                     // 统计对象
-	List(filters map[string]string, list ...*protobuf.ListParam) ([]ModelObject, error) // 列出对象, list不传的时候获取所有对象
-	GetQueryConditions(filters map[string]string) []Condition                           // 获取查询条件
+	Get(id int64) (ModelObject, error)                                               // 获取对象
+	Count(filters map[string]any) (int64, error)                                     // 统计对象
+	List(filters map[string]any, list ...*protobuf.ListParam) ([]ModelObject, error) // 列出对象, list不传的时候获取所有对象
+	GetQueryConditions(filters map[string]any) []Condition                           // 获取查询条件
 }
 
 // DbUpdate 更新：U
@@ -61,10 +61,10 @@ type RefDbCreate[RefBizObject any, RefModelObject any] interface {
 
 // RefDbRetrieve 读取关联对象操作:R
 type RefDbRetrieve[RefModelObject any, Condition any] interface {
-	Get(id, refId int64) (RefModelObject, error)                                                           // 获取关联对象DAO
-	Count(id int64, refObjFilters map[string]string) (int64, error)                                        // 统计关联对象DAO
-	List(id int64, refObjFilters map[string]string, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
-	GetQueryConditions(id int64, refObjFilters map[string]string) []Condition                              // 获取关联对象DAO
+	Get(id, itemId int64) (RefModelObject, error)                                                       // 获取关联对象DAO
+	Count(id int64, refObjFilters map[string]any) (int64, error)                                        // 统计关联对象DAO
+	List(id int64, refObjFilters map[string]any, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
+	GetQueryConditions(id int64, refObjFilters map[string]any) []Condition                              // 获取关联对象DAO
 }
 
 // RefDbUpdate 更新关联对象：U
@@ -78,10 +78,10 @@ type RefDbEdit[RefBizObject any] interface {
 
 // RefDbDelete 删除关联对象
 type RefDbDelete interface {
-	Delete(id int64, refId int64) error // 删除关联对象DAO
+	Delete(id int64, itemId int64) error // 删除关联对象DAO
 }
 
 // RefDbBulkRetrieve 批量读取关联对象
 type RefDbBulkRetrieve[ModelObject any] interface {
-	BulkGet(id int64, refIds []int64) (map[int64]ModelObject, error) // 批量获取对象
+	BulkGet(id int64, itemIds []int64) (map[int64]ModelObject, error) // 批量获取对象
 }
