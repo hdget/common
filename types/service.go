@@ -5,11 +5,6 @@ import (
 	"github.com/hdget/common/protobuf"
 )
 
-type ServiceQueryResponse[BizObject any] struct {
-	Total int64       `json:"total"`
-	Items []BizObject `json:"items"`
-}
-
 type ServiceOperation[BizObject any] interface {
 	ServiceCreate[BizObject]
 	ServiceRetrieve[BizObject]
@@ -23,7 +18,7 @@ type ServiceCreate[BizObject any] interface {
 
 type ServiceRetrieve[BizObject any] interface {
 	Get(ctx biz.Context, id int64) (BizObject, error)                                                       // 获取业务对象
-	Query(ctx biz.Context, filters map[string]string, list *protobuf.ListParam) (int64, []BizObject, error) // 查询业务对象
+	Query(ctx biz.Context, filters map[string]any, list ...*protobuf.ListParam) (int64, []BizObject, error) // 查询业务对象
 }
 
 type ServiceUpdate[BizObject any] interface {
