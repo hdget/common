@@ -21,7 +21,7 @@ type DeleteObjectRequest struct {
 }
 
 type QueryObjectRequest struct {
-	Filters map[string]string   `json:"filters"`
+	Filters map[string]any      `json:"filters"`
 	List    *protobuf.ListParam `json:"list"`
 }
 
