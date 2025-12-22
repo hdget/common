@@ -26,7 +26,7 @@ type GetRefObjectRequest struct {
 
 type QueryRefObjectRequest struct {
 	Id      int64               `json:"id"`
-	Filters map[string]any      `json:"filters,omitempty"`
+	Filters map[string]string   `json:"filters,omitempty"`
 	List    *protobuf.ListParam `json:"list,omitempty"`
 }
 

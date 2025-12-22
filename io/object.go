@@ -17,7 +17,7 @@ type BulkOperateObjectRequest struct {
 }
 
 type QueryObjectRequest struct {
-	Filters map[string]any      `json:"filters,omitempty"`
+	Filters map[string]string   `json:"filters,omitempty"`
 	List    *protobuf.ListParam `json:"list,omitempty"`
 }
 
