@@ -11,7 +11,7 @@ type GetObjectRequest struct {
 }
 
 type BulkGetObjectRequest struct {
-	Ids   []int64  `json:"ids"`
+	Ids   []int64  `json:"ids,omitempty"`
 	Sns   []string `json:"sns,omitempty"`
 	Names []string `json:"names,omitempty"`
 }
