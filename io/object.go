@@ -4,28 +4,16 @@ import "github.com/hdget/common/protobuf"
 
 /* request */
 
-type GetObjectRequest struct {
+type OperateObjectRequest struct {
 	Id   int64  `json:"id,omitempty"`
 	Sn   string `json:"sns,omitempty"`
 	Name string `json:"name,omitempty"`
 }
 
-type BulkGetObjectRequest struct {
+type BulkOperateObjectRequest struct {
 	Ids   []int64  `json:"ids,omitempty"`
 	Sns   []string `json:"sns,omitempty"`
 	Names []string `json:"names,omitempty"`
-}
-
-type ApproveObjectRequest struct {
-	Id   int64  `json:"id,omitempty"`
-	Sn   string `json:"sns,omitempty"`
-	Name string `json:"name,omitempty"`
-}
-
-type DeleteObjectRequest struct {
-	Id   int64  `json:"id,omitempty"`
-	Sn   string `json:"sns,omitempty"`
-	Name string `json:"name,omitempty"`
 }
 
 type QueryObjectRequest struct {

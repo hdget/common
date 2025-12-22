@@ -4,24 +4,9 @@ import "github.com/hdget/common/protobuf"
 
 /* request */
 
-type CreateRefObjectRequest[BizObject any] struct {
+type OperateRefObjectRequest[BizObject any] struct {
 	Id   int64     `json:"id"`
 	Item BizObject `json:"item"`
-}
-
-type EditRefObjectRequest[BizObject any] struct {
-	Id   int64     `json:"id"`
-	Item BizObject `json:"item"`
-}
-
-type DeleteRefObjectRequest struct {
-	Id     int64 `json:"id"`
-	ItemId int64 `json:"itemId"`
-}
-
-type GetRefObjectRequest struct {
-	Id     int64 `json:"id"`
-	ItemId int64 `json:"itemId"`
 }
 
 type QueryRefObjectRequest struct {
