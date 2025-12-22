@@ -61,10 +61,10 @@ type RefDbCreate[RefBizObject any, RefModelObject any] interface {
 
 // RefDbRetrieve 读取关联对象操作:R
 type RefDbRetrieve[RefModelObject any, Condition any] interface {
-	Get(id, itemId int64) (RefModelObject, error)                                                       // 获取关联对象DAO
-	Count(id int64, refObjFilters map[string]any) (int64, error)                                        // 统计关联对象DAO
-	List(id int64, refObjFilters map[string]any, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
-	GetQueryConditions(id int64, refObjFilters map[string]any) []Condition                              // 获取关联对象DAO
+	Get(id, itemId int64) (RefModelObject, error)                                                          // 获取关联对象DAO
+	Count(id int64, refObjFilters map[string]string) (int64, error)                                        // 统计关联对象DAO
+	List(id int64, refObjFilters map[string]string, list ...*protobuf.ListParam) ([]RefModelObject, error) // 列出关联对象DAO
+	GetQueryConditions(id int64, refObjFilters map[string]string) []Condition                              // 获取关联对象DAO
 }
 
 // RefDbUpdate 更新关联对象：U
