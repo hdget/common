@@ -23,7 +23,7 @@ type ApproveObjectRequest struct {
 }
 
 type DeleteObjectRequest struct {
-	Id   int64  `json:"id"`
+	Id   int64  `json:"id,omitempty"`
 	Sn   string `json:"sns,omitempty"`
 	Name string `json:"name,omitempty"`
 }
