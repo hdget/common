@@ -55,10 +55,13 @@ func NewFromIncomingGrpcContext(ctx context.Context) Context {
 			val, _ := strconv.ParseInt(values[0], 10, 64)
 			c.metadata.Set(key, val)
 		case meta.KeyRoleIds:
-			strIds := strings.Split(values[0], ",")
-			val := make([]int64, len(strIds))
-			for i, s := range strIds {
-				val[i], _ = strconv.ParseInt(s, 10, 64)
+			var val []int64
+			if values[0] != "" {
+				strIds := strings.Split(values[0], ",")
+				val = make([]int64, len(strIds))
+				for i, s := range strIds {
+					val[i], _ = strconv.ParseInt(s, 10, 64)
+				}
 			}
 			c.metadata.Set(key, val)
 		default:

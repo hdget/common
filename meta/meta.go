@@ -98,6 +98,11 @@ func (impl *metaDataImpl) AsGRPCMetaData() map[string][]string {
 			md[key] = []string{val}
 		case int64:
 			md[key] = []string{strconv.FormatInt(val, 10)}
+		case []int64:
+			md[key] = make([]string, len(val))
+			for i, vv := range val {
+				md[key][i] = strconv.FormatInt(vv, 10)
+			}
 		default:
 			// 对于未处理类型，使用fallback方案
 			md[key] = []string{""}
