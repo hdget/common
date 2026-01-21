@@ -5,26 +5,30 @@ import (
 	"github.com/hdget/common/protobuf"
 )
 
-type ServiceOperation[BizObject any] interface {
-	ServiceCreate[BizObject]
-	ServiceRetrieve[BizObject]
-	ServiceUpdate[BizObject]
-	ServiceDelete
+type AllowedKey interface {
+	int64 | int32 | int | string
 }
 
-type ServiceCreate[BizObject any] interface {
-	Create(ctx biz.Context, object BizObject) (int64, error) // 创建业务对象
+type ServiceOperation[TKey AllowedKey, TBizObject any] interface {
+	ServiceCreate[TBizObject]
+	ServiceRetrieve[TKey, TBizObject]
+	ServiceUpdate[TBizObject]
+	ServiceDelete[TKey]
 }
 
-type ServiceRetrieve[BizObject any] interface {
-	Get(ctx biz.Context, id int64) (BizObject, error)                                                          // 获取业务对象
-	Query(ctx biz.Context, filters map[string]string, list ...*protobuf.ListParam) (int64, []BizObject, error) // 查询业务对象
+type ServiceCreate[TBizObject any] interface {
+	Create(ctx biz.Context, object TBizObject) (int64, error) // 创建业务对象
 }
 
-type ServiceUpdate[BizObject any] interface {
-	Edit(ctx biz.Context, bizObject BizObject) error // 编辑业务对象
+type ServiceRetrieve[TKey AllowedKey, TBizObject any] interface {
+	Get(ctx biz.Context, key TKey) (TBizObject, error)                                                          // 获取业务对象
+	Query(ctx biz.Context, filters map[string]string, list ...*protobuf.ListParam) (int64, []TBizObject, error) // 查询业务对象
 }
 
-type ServiceDelete interface {
-	Delete(ctx biz.Context, id int64) error // 删除业务对象
+type ServiceUpdate[TBizObject any] interface {
+	Edit(ctx biz.Context, bizObject TBizObject) error // 编辑业务对象
+}
+
+type ServiceDelete[TKey AllowedKey] interface {
+	Delete(ctx biz.Context, key TKey) error // 删除业务对象
 }
