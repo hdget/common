@@ -1,18 +1,18 @@
-package object
+package types
 
 import "github.com/hdget/common/protobuf"
 
-/* request */
-
-type Identifier interface {
+type ObjectIdentifier interface {
 	int64 | int32 | int | string
 }
 
-type OperateObjectRequest[TObjectId Identifier] struct {
+/* request */
+
+type OperateObjectRequest[TObjectId ObjectIdentifier] struct {
 	Id TObjectId `json:"id"`
 }
 
-type BulkOperateObjectRequest[TObjectId Identifier] struct {
+type BulkOperateObjectRequest[TObjectId ObjectIdentifier] struct {
 	Ids []TObjectId `json:"ids"`
 }
 
@@ -23,7 +23,7 @@ type QueryObjectRequest struct {
 
 /* response */
 
-type CreateObjectResponse[TObjectId Identifier] struct {
+type CreateObjectResponse[TObjectId ObjectIdentifier] struct {
 	Id TObjectId `json:"id"`
 }
 

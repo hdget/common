@@ -1,4 +1,4 @@
-package object
+package types
 
 import (
 	"github.com/hdget/common/protobuf"
@@ -6,27 +6,27 @@ import (
 
 /* request */
 
-type CreateRefObjectRequest[TObjectId Identifier, TBizObject any] struct {
+type CreateRefObjectRequest[TObjectId ObjectIdentifier, TBizObject any] struct {
 	Id   TObjectId  `json:"id"`
 	Item TBizObject `json:"item"`
 }
 
-type EditRefObjectRequest[TObjectId Identifier, TBizObject any] struct {
+type EditRefObjectRequest[TObjectId ObjectIdentifier, TBizObject any] struct {
 	Id   TObjectId  `json:"id"`
 	Item TBizObject `json:"item"`
 }
 
-type DeleteRefObjectRequest[TObjectId Identifier] struct {
+type DeleteRefObjectRequest[TObjectId ObjectIdentifier] struct {
 	Id     TObjectId `json:"id"`
 	ItemId TObjectId `json:"itemId"`
 }
 
-type GetRefObjectRequest[TObjectId Identifier] struct {
+type GetRefObjectRequest[TObjectId ObjectIdentifier] struct {
 	Id     TObjectId `json:"id"`
 	ItemId TObjectId `json:"itemId"`
 }
 
-type QueryRefObjectRequest[TObjectId Identifier] struct {
+type QueryRefObjectRequest[TObjectId ObjectIdentifier] struct {
 	Id      TObjectId           `json:"id"`
 	Filters map[string]string   `json:"filters,omitempty"`
 	List    *protobuf.ListParam `json:"list,omitempty"`
